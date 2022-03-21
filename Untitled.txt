@@ -1,0 +1,126 @@
+from tkinter import *
+from tkinter import messagebox as msg
+
+
+
+class main(Frame):
+    def __init__(self,master):
+        super().__init__(master)
+        f4=Frame(root,bg='grey')
+        self.scvalue=StringVar()
+        self.scvalue.set("")
+        self.lblName=Label(root,text='Casio 991x',font='lucida 20 italic',fg='white',bg='black')
+        self.lblName.pack(fill=X)
+        self.screen=Entry(root,textvar=self.scvalue,font='lucida 20 bold',fg='red')
+        self.screen.pack(fill=X)
+        f4.pack()
+        self.btn
+    def btn(self):
+        f1=Frame(root,bg='grey')
+        self.btn9=Button(f1,text='9',font='lucida 20 bold',bd=9,bg='orange')
+        self.btn9.pack(side='left',ipadx=12)
+        self.btn9.bind("<Button-1>",self.click)
+        
+        
+        self.btn8=Button(f1,text='8',font='lucida 20 bold',bd=9,bg='orange')
+        self.btn8.pack(side='left',ipadx=12)
+        self.btn8.bind("<Button-1>",self.click)
+        
+        self.btn7=Button(f1,text='7',font='lucida 20 bold',bd=9,bg='orange')
+        self.btn7.pack(side='left',ipadx=12)
+        self.btn7.bind("<Button-1>",self.click)
+        
+        self.btnDiv=Button(f1,text='/',font='lucida 20 bold',bd=9,bg='orange')
+        self.btnDiv.pack(side='left',ipadx=12)
+        self.btnDiv.bind("<Button-1>",self.click)
+        
+        f1.pack()
+        
+        f1=Frame(root,bg='grey')
+        self.btn6=Button(f1,text='6',font='lucida 20 bold',bd=9)
+        self.btn6.pack(side='left',ipadx=12)
+        self.btn6.bind("<Button-1>",self.click)
+        
+        self.btn5=Button(f1,text='5',font='lucida 20 bold',bd=9)
+        self.btn5.pack(side='left',ipadx=12)
+        self.btn5.bind("<Button-1>",self.click)
+        
+        self.btn4=Button(f1,text='4',font='lucida 20 bold',bd=9)
+        self.btn4.pack(side='left',ipadx=12)
+        self.btn4.bind("<Button-1>",self.click)
+        
+        self.btnMul=Button(f1,text='*',font='lucida 20 bold',bd=9)
+        self.btnMul.pack(side='left',ipadx=11)
+        self.btnMul.bind("<Button-1>",self.click)
+        
+        f1.pack()
+        
+        f1=Frame(root,bg='grey')
+        self.btn3=Button(f1,text='3',font='lucida 20 bold',bd=9,bg='green')
+        self.btn3.pack(side='left',ipadx=12)
+        self.btn3.bind("<Button-1>",self.click)
+        
+        self.btn2=Button(f1,text='2',font='lucida 20 bold',bd=9,bg='green')
+        self.btn2.pack(side='left',ipadx=12)
+        self.btn2.bind("<Button-1>",self.click)
+        
+        self.btn1=Button(f1,text='1',font='lucida 20 bold',bd=9,bg='green')
+        self.btn1.pack(side='left',ipadx=12)
+        self.btn1.bind("<Button-1>",self.click)
+        
+        self.btnSub=Button(f1,text='-',font='lucida 20 bold',bd=9,bg='green')
+        self.btnSub.pack(side='left',ipadx=11)
+        self.btnSub.bind("<Button-1>",self.click)
+        
+        f1.pack()
+        
+        f1=Frame(root,bg='grey')
+        self.btnPls=Button(f1,text='+',font='lucida 20 bold',bd=9,bg='red')
+        self.btnPls.pack(side='left',ipadx=12)
+        self.btnPls.bind("<Button-1>",self.click)
+        
+        
+        self.btn0=Button(f1,text='0',font='lucida 20 bold',bd=11,bg='red')
+        self.btn0.pack(side='left',ipadx=10)
+        self.btn0.bind("<Button-1>",self.click)
+        
+        self.btnClr=Button(f1,text='C',font='lucida 20 bold',bd=11,bg='red')
+        self.btnClr.pack(side='left',ipadx=5)
+        self.btnClr.bind("<Button-1>",self.click)
+        
+        self.btnEql=Button(f1,text='=',font='lucida 20 bold',bd=11,bg='red')
+        self.btnEql.pack(side='left',ipadx=6)
+        self.btnEql.bind("<Button-1>",self.click)
+        
+        
+        f1.pack()
+    def click(self,event):
+        text= event.widget.cget("text")
+        print(text)
+        if text=='=':
+            if self.scvalue.get().isdigit():
+                value=int(self.scvalue.get())
+            else:
+                try:
+                    value=eval(self.screen.get())
+                except Exception as e:
+                    print(e)
+                    self.scvalue.set('Math Error')
+                    self.screen.update()
+                    
+            self.scvalue.set(value)
+            self.screen.update()
+        elif text=='C':
+            self.scvalue.set("")
+            self.screen.update()
+        else:
+            self.scvalue.set(self.scvalue.get()+text)
+            self.screen.update()    
+    
+root=Tk()
+root.title('Calculator')
+obj=main(root)
+root.geometry('310x355')
+
+obj.btn()
+root.mainloop()
